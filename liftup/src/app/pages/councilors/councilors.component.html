@@ -1,0 +1,19 @@
+
+<div class="container">
+  <div class="row" style="text-align: center;padding: 2%;">
+    <h4 class="col-12">COUNCILORS:</h4>
+  </div>
+  <div class="row scrl">
+    <div class="col-md-3" *ngFor="let councilor of councilors">
+      <div class="outerBox">
+        <img class="councilorImg" src="data:image/jpeg;base64,{{councilor?.Photo}}" alt="">
+        <div class="box">
+          <h4 class="col-12">{{councilor?.Firstname}} {{councilor?.Lastname}}</h4>
+          <h5>Councilor</h5>
+          <p>"{{councilor?.Quote}}"</p>
+          <button class="btn btn-success col-12" (click)="addMessageSet(councilor.UserAccountId, councilor.Firstname)">Ask Advice</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

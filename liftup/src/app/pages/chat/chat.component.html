@@ -1,0 +1,126 @@
+
+<div class="container clearfix">
+  <div class="row">
+    <div class="col-md-4">
+      <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarPeopleList" aria-controls="navbarPeopleList"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span> 
+      </button>
+      <div class="collapse navbar-collapse" id="navbarPeopleList">
+        <div class="people-list" id="people-list">
+          <div class="search">
+            <input type="text" placeholder="search" [(ngModel)]="search" (change)="SetSearch($event)"/>
+            <i class="fa fa-search"></i>
+          </div>
+ 
+          <ul class="list">
+              <span style="color: rgb(143, 143, 143)" *ngIf="chatMateInfos == null">Chat is empty.</span>
+            <li class="clearfix" [ngClass]="{
+              selected: chatMate.Selected
+            }"
+            style="cursor: pointer;"  *ngFor="let chatMate of chatMateInfos" (click)="SetCurrentChatMate(chatMate)">
+              <img class="accountImage" src="data:image/jpeg;base64,{{chatMate.UserInfo.Photo}}"  alt="avatar" />
+              <div class="about">
+                <div class="name">{{chatMate.UserInfo.Firstname}} {{chatMate.UserInfo.Lastname}}</div>
+                <div class="status">
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div> 
+    <div class="col-md-8">  
+      <div class="chat" *ngIf="chatMateInfo != null">
+        <div class="chat-header clearfix">
+          <img class="accountImage" src="data:image/jpeg;base64,{{chatMateInfo?.UserInfo?.Photo}}" alt="avatar" />
+
+          <div class="chat-about">
+            <div class="chat-with">Chat with {{chatMateInfo?.UserInfo?.Firstname}} {{chatMateInfo?.UserInfo?.Lastname}}</div>
+            <div class="chat-num-messages">already {{messageSets?.length | number}} messages</div>
+          </div>
+        </div>
+        <!-- end chat-header -->
+
+        <div class="chat-history" #scrollMe>
+          <ul>
+            <li class="clearfix" *ngFor="let message of messageSets">
+              <div class="message-data align-right" [ngClass]="{
+                displayable: message.Status == 'Mine',
+                nondisplayable: message.Status == 'Other'
+              }">
+                <span class="message-data-time">{{message.TextMessage.DateTime | date:'shortTime'}} {{message.TextMessage.DateTime | date:'shortDate'}}</span> &nbsp; &nbsp;
+                <span class="mesage-data-name">{{message.FromUserInfo.Firstname}}</span>
+                <i class="fa fa-circle me"></i>
+
+              </div>
+              <div class="message other-message float-right" [ngClass]="{
+                displayable: message.Status == 'Mine',
+                nondisplayable: message.Status == 'Other'
+              }">
+                {{message.TextMessage.Message}}
+              </div>
+
+              <div class="message-data" [ngClass]="{
+                displayable: message.Status == 'Other',
+                nondisplayable: message.Status == 'Mine'
+              }">
+                <span class="message-data-name">
+                  <i class="fa fa-circle online"></i>{{message.FromUserInfo.Firstname}}</span>
+                <span class="message-data-time">{{message.TextMessage.DateTime | date:'shortTime'}} {{message.TextMessage.DateTime | date:'shortDate'}}</span>
+              </div>
+              <div class="message my-message" [ngClass]="{
+                displayable: message.Status == 'Other',
+                nondisplayable: message.Status == 'Mine'
+              }">
+              {{message.TextMessage.Message}}
+              </div>
+            </li>
+
+
+          </ul>
+
+        </div>
+        <!-- end chat-history -->
+
+        <div class="chat-message clearfix">
+          <textarea #textAreaMessage (keyup.enter)="keyUpFunction($event)" type="text" class="form-control" placeholder="Enter your message" (change)="SetMessage($event)" rows="5"></textarea>
+
+          <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+          <i class="fa fa-file-image-o"></i>
+
+          <button (click)="addMessageSet()">Send</button>
+        </div>
+        <!-- end chat-message -->
+
+      </div>
+    </div>
+
+  <!-- end chat -->
+
+</div>
+<!-- end container -->
+</div>
+<!-- <script id="message-template" type="text/x-handlebars-template">
+<li class="clearfix">
+  <div class="message-data align-right">
+    <span class="message-data-time" >{{time}}, Today</span> &nbsp; &nbsp;
+    <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
+  </div>
+  <div class="message other-message float-right">
+    {{messageOutput}}
+  </div>
+</li>
+</script>
+
+<script id="message-response-template" type="text/x-handlebars-template">
+<li>
+  <div class="message-data">
+    <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
+    <span class="message-data-time">{{time}}, Today</span>
+  </div>
+  <div class="message my-message">
+    {{response}}
+  </div>
+</li>
+</script> -->

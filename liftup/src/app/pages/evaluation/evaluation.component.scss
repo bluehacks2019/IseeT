@@ -1,0 +1,90 @@
+.container
+{
+    margin-top: 50px;
+}
+
+.col-md-3
+{
+    margin-top: 25px;
+}
+
+.ques
+{
+    background-color: #007766;
+    padding:40px;
+    margin-top: 50px;
+    border-radius: 10px;
+}
+
+.symptom
+{
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-bottom: 0px;
+    color: #fff;
+}
+
+.result
+{
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-bottom: 0px;
+    color: #fff;
+}
+
+.buts .btn
+{
+    font-size: 2rem;
+    margin-top: 30px;
+    // padding: 20px 100px;
+}
+
+.btn:first-child
+{
+    margin-right: 30px;
+}
+
+
+
+.councilorImg
+{
+    width: 100px;
+    height: 100px;
+    // margin: 15px 0px;
+    border-radius: 50%;
+    border: solid 5px #94C2ED;
+}
+
+.scrl
+{
+    height: 390px;
+    overflow-y: scroll;
+}
+
+.outerBox
+{
+    text-align: center;
+    // border: solid 1px #94c2ed;
+}
+
+.box
+{
+    // background-color: #4f8dc7;
+    width: 100%;
+    // padding: 20px;
+    // color: #fff;
+}
+
+.modal h4
+{   
+    font-size: 1rem;
+}
+
+
+@media screen and (max-width: 768px){
+    .result
+    {
+        font-size: 0.9rem; 
+    }
+}

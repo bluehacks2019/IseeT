@@ -1,0 +1,42 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand">
+        <img src="../../../assets/imgs/LIFTUP.png" width="110" height="50" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto" *ngIf="userSet?.UserAccount.UserType == 'Client' 
+        || userSet?.UserAccount.UserType == 'Councilor'">
+            <li class="nav-item" *ngIf="userSet?.UserAccount.UserType == 'Client'" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+              true}">
+              <a class="nav-link" [routerLink]="['councilors']">Councilors</a>
+            </li>
+          <li class="nav-item" *ngIf="userSet?.UserAccount.UserType == 'Client'" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+            true}">
+            <a class="nav-link" [routerLink]="['evaluation']">Self Evaluation</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+            true}">
+            <a class="nav-link" [routerLink]="['chat']">Chat</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav mr-auto" *ngIf="userSet?.UserAccount.UserType == 'Admin'">
+          <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+            true}">
+            <a class="nav-link" [routerLink]="['manage']">Manage Councilor</a>
+          </li>
+        </ul>
+        <div class="ml-auto">
+            <img class="accountImage" src="data:image/jpeg;base64,{{userSet?.UserInfo.Photo}}" alt="avatar" />
+            <span>{{userSet?.UserInfo.Firstname}} {{userSet?.UserInfo.Lastname}}</span>
+            <button class="btn btn-outline-info" (click)="logout()">Logout</button>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header>

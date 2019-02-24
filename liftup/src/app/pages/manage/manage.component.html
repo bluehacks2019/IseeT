@@ -1,0 +1,89 @@
+<div class="container">
+  <button class="btn btn-info btn-lg float-right mb-3" data-toggle="modal" data-target="#register">Add</button>
+  <table class="table table-responsive">
+    <thead class="bg-success">
+      <tr>
+        <th scope="col">Photo</th>
+        <th scope="col">Username</th>
+        <th scope="col">Firstname</th>
+        <th scope="col">Middlename</th>
+        <th scope="col">Lastname</th>
+        <th scope="col">Quote</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody class="table-striped">
+      <tr *ngFor="let councilor of councilors">
+        <td>
+          <img class="accountImage" src="data:image/jpeg;base64,{{councilor.UserInfo.Photo}}" alt="avatar" />
+        </td>
+        <td>{{councilor.UserAccount.Username}}</td>
+        <td>{{councilor.UserInfo.Firstname}}</td>
+        <td>{{councilor.UserInfo.Middlename}}</td>
+        <td>{{councilor.UserInfo.Lastname}}</td>
+        <td>{{councilor.UserInfo.Quote}}</td>
+        <td>
+          <button class="btn btn-sm btn-outline-danger" (click)="RemoveCouncilor(councilor)">Remove</button>
+        </td>
+      </tr>
+      <tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Register a Councilor</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlFile1">Photo</label>
+          <input type="file" class="form-control-file" id="exampleFormControlFile1" (change)="onFileUpload($event)" #selectFile
+          accept="image/*">
+        </div>
+        <form>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" [(ngModel)]="registerUsername" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter Username">
+          </div>
+          <div class="form-group">
+            <label for="firstname">Firstname</label>
+            <input type="text" [(ngModel)]="registerFirstname" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter Firstname">
+          </div>
+          <div class="form-group">
+            <label for="midname">Middlename</label>
+            <input type="text" [(ngModel)]="registerMiddlename" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter Middlename">
+          </div>
+          <div class="form-group">
+            <label for="lastname">Lastname</label>
+            <input type="text" [(ngModel)]="registerLastname" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter Lastname">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" [(ngModel)]="registerPassword" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleInputPassword1"
+              placeholder="Password">
+          </div>
+          <div class="form-group">
+            <label for="confirmpass">Confirm Password</label>
+            <input type="password" [(ngModel)]="registerConfirmPassword" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleInputPassword2"
+              placeholder="Confirm Password">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Quote</label>
+            <textarea class="form-control" [(ngModel)]="registerQuote" [ngModelOptions]="{standalone: true}" id="exampleFormControlTextarea1"
+              rows="3"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success btn-lg" data-dismiss="modal" (click)="Register()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

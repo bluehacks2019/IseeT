@@ -1,0 +1,70 @@
+<div class="container text-center" *ngIf="!resultShowable && !evaluationStarted">
+  <h1>SELF EVALUATION</h1>
+  <h5>Reminder</h5>
+  <div class="ques">
+    <p class="result">This evaluation provides you result according to what you answered. This is not to conclude that you are experiencing
+      depression but informing you that you may be. Still, we recommend you to go to your councilor/psychiatrist to confirm
+      and to be informed what to do.
+    </p>
+  </div>
+  <div class="buts">
+    <button class="btn btn-outline-success col-6" (click)="Proceed()">PROCEED</button>
+  </div>
+</div>
+
+<div class="container text-center" *ngIf="!resultShowable && evaluationStarted">
+  <h1>SELF EVALUATION</h1>
+  <h5>{{currentItemNo}} of {{depressionSymptoms?.length}}</h5>
+  <h4 class="float-left">ARE YOU EXPERIENCING THIS:</h4>
+  <div class="ques">
+    <p class="symptom">{{currentItem?.Symptom}}</p>
+  </div>
+  <div class="buts">
+    <button class="btn btn-outline-info col-3" *ngIf="currentItemNo != depressionSymptoms?.length" (click)="SetAnswer('Yes')">YES</button>
+    <button class="btn btn-outline-danger col-3" *ngIf="currentItemNo != depressionSymptoms?.length" (click)="SetAnswer('No')">NO</button>
+    <button class="btn btn-outline-success col-6" *ngIf="currentItemNo == depressionSymptoms?.length" (click)="ShowResult()">Finish</button>
+  </div>
+</div>
+
+<div class="container text-center" style="text-align: center;" *ngIf="resultShowable">
+  <h1>SELF EVALUATION</h1>
+  <h5>Result</h5>
+  <div class="ques">
+    <p class="result" style="white-space: pre;">{{resultString}}</p>
+  </div>
+  <div class="buts">
+    <button class="btn btn-outline-info col-3" (click)="ChooseCouncilor()" data-toggle="modal" data-target="#sendTo">Send</button>
+    <button class="btn btn-outline-success col-3" (click)="Ok()">Ok</button>
+  </div>
+</div>
+
+<div class="modal fade" id="sendTo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Select Councilor</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row scrl">
+          <div class="col-md-3" *ngFor="let councilor of councilors">
+            <div class="outerBox">
+              <img class="councilorImg" src="data:image/jpeg;base64,{{councilor?.Photo}}" alt="">
+              <div class="box">
+                <h4 class="col-12">{{councilor?.Firstname}} {{councilor?.Lastname}}</h4>
+                <h5>Councilor</h5>
+                <p>"{{councilor?.Quote}}"</p>
+                <button class="btn btn-success" data-dismiss="modal" (click)="addMessageSet(councilor.UserAccountId, councilor.Firstname, resultString)">Ask Advice</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
